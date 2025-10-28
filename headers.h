@@ -20,7 +20,9 @@ typedef struct {
 } tInfo;
 
 
-int obtenerHash(const char *clave, int cap);
+
+void liberarInfo(void *info);
 void mostrarReg(void *elem, void *params);
+
 
 #endif // HEADERS_H_INCLUDED

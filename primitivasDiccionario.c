@@ -20,20 +20,21 @@ void crearDiccionario(tDiccionario *pd, int cap){
 int ponerEnDiccionario(tDiccionario *pd, char *clave, void *valor, size_t tamValor){
     int indiceHash = obtenerHash(clave, pd->capacidad);
     tLista *pLista = &(pd->tabla[indiceHash]);
-    tInfo *nInfo, *infoAct;
+    tInfo *nInfo, *actInfo;
     void *nValor;
 
+    //Reccorido de Lista en el Indice del Hash
     while(*pLista){
-        infoAct = (tInfo *)(*pLista)->info;
-        if(strcmp(infoAct->clave, clave) == 0){
-            nValor = realloc(infoAct->valor, tamValor);
+        actInfo = (tInfo *)(*pLista)->info;
+        //Se verifica la igualdad de las claves
+        if(strcmp(actInfo->clave, clave) == 0){
+            nValor = realloc(actInfo->valor, tamValor);
             if(!nValor) return SIN_MEM;
 
-            infoAct->valor = nValor;
-            memcpy(infoAct->valor, valor, tamValor);
+            actInfo->valor = nValor;
+            memcpy(actInfo->valor, valor, tamValor);
             return OK;
         }
-
         pLista = &(*pLista)->sig;
     }
 
@@ -51,15 +52,46 @@ int ponerEnDiccionario(tDiccionario *pd, char *clave, void *valor, size_t tamVal
 }
 
 
-void obtenerDiccionario(tDiccionario *pd, char *clave){
+void* obtenerDiccionario(tDiccionario *pd, char *clave){
     int indiceHash = obtenerHash(clave, pd->capacidad);
 
-    tNodo *actual = pd->tabla[indiceHash];
+    tLista *pLista = &(pd->tabla[indiceHash]);
+    tInfo *actInfo;
 
-    tInfo *infoActual = actual->info;
+    if(!*pLista) return NULL; //Lista Vacia
 
-    printf("%s: %d\n", infoActual->clave, *(int*)infoActual->valor);
+    while(*pLista){
+        actInfo = (tInfo *)(*pLista)->info;
+        if(strcmp(actInfo->clave, clave) == 0)
+            return actInfo->valor;
+    }
 
+    return NULL; //No se encuentra valor para esa clave.
+}
+
+int sacarDeDiccionario(tDiccionario *pd, const char *clave){
+    int indiceHash = obtenerHash(clave, pd->capacidad);
+
+    tLista *pLista = &(pd->tabla[indiceHash]);
+    tNodo *elim;
+    tInfo *actInfo;
+
+    if(!*pLista) return LISTA_VACIA; //Lista Vacia
+
+    while(*pLista){
+        actInfo = (tInfo *)(*pLista)->info;
+        if(strcmp(actInfo->clave, clave) == 0){
+            elim = *pLista;
+            *pLista = elim->sig;
+
+            liberarInfo(elim->info);
+            free(elim);
+            return OK;
+        }
+        pLista = &(*pLista)->sig;
+    }
+
+    return NO_ENCONTRADO; //No se encontro elemento con esa clave en el diccionario.
 }
 
 void recorrerDiccionario(tDiccionario *pd, void (*accion)(void *elem, void *params), void *params){
@@ -68,11 +100,16 @@ void recorrerDiccionario(tDiccionario *pd, void (*accion)(void *elem, void *para
     }
 }
 
-void destruirDiccionario(tDiccionario *pd){
+void vaciarDiccionario(tDiccionario *pd){
     for(int i=0; i < pd->capacidad; i++){
         if(pd->tabla[i] != NULL)
             vaciarLista(&(pd->tabla[i]));
     }
-    free(pd->tabla);
 }
 
+void destruirDiccionario(tDiccionario *pd){
+    vaciarDiccionario(pd);
+    free(pd->tabla);
+    pd->tabla = NULL;
+    pd->capacidad = 0;
+}

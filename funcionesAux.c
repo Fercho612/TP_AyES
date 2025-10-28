@@ -10,6 +10,17 @@ int obtenerHash(const char *clave, int cap) {
 }
 
 
+void liberarInfo(void *info) {
+    tInfo *elimInfo = (tInfo *)info;
+
+    if (!elimInfo) return;
+
+    free(elimInfo->clave);
+    free(elimInfo->valor);
+    free(elimInfo);
+}
+
+
 void mostrarReg(void *elem, void *params){
     tInfo *info = (tInfo *)elem;
 
