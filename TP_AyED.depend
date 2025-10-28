@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1761676967 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\funcionesaux.c
+	"headers.h"
+
+1761677430 d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\lista.h
+	"headers.h"
+
+1761675463 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\main.c
+	"diccionario.h"
+
+1761677320 d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\headers.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lista.h"
+
+1761677529 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\primitivasdiccionario.c
+	"headers.h"
+	"diccionario.h"
+	"lista.h"
+
+1761677083 d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\diccionario.h
+	"lista.h"
+
+1761677347 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\primitivaslistase.c
+	"lista.h"
+

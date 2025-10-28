@@ -1,0 +1,78 @@
+#include "headers.h"
+#include "diccionario.h"
+#include "lista.h"
+
+void crearDiccionario(tDiccionario *pd, int cap){
+    pd->tabla = malloc(sizeof(tLista) * cap);
+    if(!pd){
+        printf("Error en la memoria\n");
+        exit(SIN_MEM);
+    }
+
+    pd->capacidad = cap;
+
+    //Inicializo los punteros de tabla en NULL
+    for(int i=0; i<cap; i++) {
+        pd->tabla[i] = NULL;
+    }
+}
+
+int ponerEnDiccionario(tDiccionario *pd, char *clave, void *valor, size_t tamValor){
+    int indiceHash = obtenerHash(clave, pd->capacidad);
+    tLista *pLista = &(pd->tabla[indiceHash]);
+    tInfo *nInfo, *infoAct;
+    void *nValor;
+
+    while(*pLista){
+        infoAct = (tInfo *)(*pLista)->info;
+        if(strcmp(infoAct->clave, clave) == 0){
+            nValor = realloc(infoAct->valor, tamValor);
+            if(!nValor) return SIN_MEM;
+
+            infoAct->valor = nValor;
+            memcpy(infoAct->valor, valor, tamValor);
+            return OK;
+        }
+
+        pLista = &(*pLista)->sig;
+    }
+
+    if(!RESERVAR_MEMORIA_TINFO(nInfo, sizeof(tInfo), nInfo->valor, tamValor, nInfo->clave, strlen(clave) + 1)){
+           printf("Error en la memoria\n");
+           exit(SIN_MEM);
+    }
+
+    strcpy(nInfo->clave, clave);
+    memcpy(nInfo->valor, valor, tamValor);
+
+    insertarUltimoLista(pLista, nInfo, sizeof(nInfo));
+
+    return OK;
+}
+
+
+void obtenerDiccionario(tDiccionario *pd, char *clave){
+    int indiceHash = obtenerHash(clave, pd->capacidad);
+
+    tNodo *actual = pd->tabla[indiceHash];
+
+    tInfo *infoActual = actual->info;
+
+    printf("%s: %d\n", infoActual->clave, *(int*)infoActual->valor);
+
+}
+
+void recorrerDiccionario(tDiccionario *pd, void (*accion)(void *elem, void *params), void *params){
+    for(int i=0; i<pd->capacidad; i++){
+        recorrerLista(&(pd->tabla[i]), accion, params);
+    }
+}
+
+void destruirDiccionario(tDiccionario *pd){
+    for(int i=0; i < pd->capacidad; i++){
+        if(pd->tabla[i] != NULL)
+            vaciarLista(&(pd->tabla[i]));
+    }
+    free(pd->tabla);
+}
+
