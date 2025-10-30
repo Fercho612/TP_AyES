@@ -3,6 +3,15 @@
 #include "lista.h"
 #include "myString.h"
 
+unsigned int obtenerHash(const char *clave, int cap) {
+    unsigned int auxHash = 0;
+    while (*clave != '\0') {
+        auxHash += *clave;
+        clave++;
+    }
+    return auxHash % cap;
+}
+
 void crearDiccionario(tDiccionario *pd, int cap){
     pd->tabla = malloc(sizeof(tLista) * cap);
     if(!pd){
@@ -108,6 +117,16 @@ void vaciarDiccionario(tDiccionario *pd){
         if(pd->tabla[i] != NULL)
             vaciarLista(&(pd->tabla[i]));
     }
+}
+
+void liberarInfo(void *info) {
+    tInfo *elimInfo = (tInfo *)info;
+
+    if (!elimInfo) return;
+
+    free(elimInfo->clave);
+    free(elimInfo->valor);
+    free(elimInfo);
 }
 
 void destruirDiccionario(tDiccionario *pd){

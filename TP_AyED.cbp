@@ -32,10 +32,11 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="diccionario.h" />
-		<Unit filename="funcionesAux.c">
+		<Unit filename="headers.h" />
+		<Unit filename="interfaz.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="headers.h" />
+		<Unit filename="interfaz.h" />
 		<Unit filename="lista.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />

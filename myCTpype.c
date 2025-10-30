@@ -41,3 +41,11 @@ char transformarCarLatin(int c){
 
     return aux;
 }
+
+int myToLower(int c){
+    if (c >= 'A' && c <= 'Z')
+        return c + ('A' - 'a');
+
+    return c == (145-195+3) ? 'ñ' : c;
+
+}

@@ -29,3 +29,14 @@ char *myStrcpy(char *str1, const char *str2){
     *str1 = '\0';
     return pIni;
 }
+
+int charEnCad(const char *str1, const char c){
+    char *pStr = (char *)str1;
+    while (*pStr != '\0'){
+        if(*pStr == c)
+            return 1; //Encontrado
+        pStr++;
+    }
+
+    return 0; //No encontrado
+}

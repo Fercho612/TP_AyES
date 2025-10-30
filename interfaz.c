@@ -1,20 +1,79 @@
 #include "interfaz.h"
 #include "procesador.h"
+#include "myString.h"
 
-// Función temporal para pruebas
-void iniciar()
-{
-    tDiccionario diccionario;
+void ingresarArchivo(tDiccionario *pd){
+    char arch[50];
 
-    crearDiccionario(&diccionario, 500);
+    printf("Ingrese nombre de archivo a procesar: ");
+    scanf("%s", arch);
 
-    procesarArchivo("test.txt", &diccionario);
+    while (procesarArchivo(arch, pd) == ERROR_ARCH){
+        printf("Ingrese nombre de archivo a procesar: ");
+        scanf("%s", arch);
+    }
 
-    menu(&diccionario);
 }
 
+void menu(tDiccionario *pd) {
+
+    char opcionSeleccionada;
+    do {
+        opcionSeleccionada = seleccionarOpcion("\n\t Menu de opciones \n"
+                                          "a) Mostrar estadisticas generales.\n"
+                                          "b) Mostrar listado de apariciones por palabra.\n"
+                                          "c) Mostrar cantidad de apariciones de palabra en particular.\n"
+                                          "s) Salir del Programa\n\n"
+                                          "Elija una opción: ", "abcs");
+
+        switch(opcionSeleccionada) {
+        case 'a':
+            mostrarEstadisticasGenerales(pd);
+            break;
+        case 'b':
+            mostrarEstadisticasPorPalabra(pd);
+            break;
+        case 'c':
+            mostrarAparicionesPalabraParticular(pd);
+            break;
+        case 's':
+            printf("Hasta Pronto!");
+            exit(1);
+            break;
+        default:
+            break;
+        }
+    }
+    while(opcionSeleccionada != 'd');
+}
+
+char seleccionarOpcion(const char* mensaje, const char* opciones)
+{
+    char opcionSeleccionada;
+
+    puts(mensaje);
+    scanf(" %c", &opcionSeleccionada);
+
+    opcionSeleccionada = myToLower(opcionSeleccionada);
+
+    while(!charEnCad(opciones, opcionSeleccionada)){
+        printf("La opción ingresada no es valida.\n");
+        printf("Ingrese una opción nuevamente: ");
+
+        scanf(" %c", &opcionSeleccionada);
+        putchar('\n');
+
+        opcionSeleccionada = myToLower(opcionSeleccionada);
+    }
+
+    return opcionSeleccionada;
+}
+
+
+
+
 void mostrarAparicionesPalabraParticular(tDiccionario *pd) {
-    char cad[TAM_CAD_PALABRA];
+    char cad[TAM_PALABRA];
     int *valor;
     int cantidad;
 
@@ -63,47 +122,5 @@ void mostrarEstadisticasPorPalabra(tDiccionario *pd) {
     putchar('\n');
 }
 
-void menu(tDiccionario *pd) {
-    char opcionSeleccionada;
 
-    do {
-        opcionSeleccionada = seleccionarOpcion("Elija una opcion\n\n"
-                                          "a) Monstrar estadisticas generales.\n"
-                                          "b) Mostrar listado de apariciones por palabra.\n"
-                                          "c) Mostrar cantidad de apariciones de palabra en particular.\n", "abcdef");
 
-        switch(opcionSeleccionada) {
-        case 'a':
-            mostrarEstadisticasGenerales(pd);
-            break;
-        case 'b':
-            mostrarEstadisticasPorPalabra(pd);
-            break;
-        case 'c':
-            mostrarAparicionesPalabraParticular(pd);
-            break;
-        default:
-            break;
-        }
-    }
-    while(opcionSeleccionada != 'd');
-}
-
-char seleccionarOpcion(const char* mensaje, const char* opciones)
-{
-    char opcionSeleccionada;
-    int primeraVez = 1;
-
-    do {
-        puts(mensaje);
-        fflush(stdin);
-        scanf("%c", &opcionSeleccionada);
-        putchar('\n');
-        if(!primeraVez)
-            puts("La opcion ingresada no es valida.");
-        primeraVez = 0;
-    }
-    while(!strchr(opciones, opcionSeleccionada = tolower(opcionSeleccionada)));
-
-    return opcionSeleccionada;
-}

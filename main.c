@@ -1,18 +1,20 @@
 #include "procesador.h"
+#include "interfaz.h"
 
 int main()
 {
     setlocale(LC_ALL, "");
 
-    tDiccionario dicc;
+    tDiccionario diccionario;
 
-    int cap = 10;
+    crearDiccionario(&diccionario, 500);
 
-    crearDiccionario(&dicc, cap);
+    printf("\tBienvenido al Procesador de Texto\n\n");
 
-    procesarArchivo("Prueba.txt", &dicc);
+    ingresarArchivo(&diccionario);
 
-    recorrerDiccionario(&dicc, mostrarReg, NULL);
+
+    menu(&diccionario);
 
     return 0;
 }

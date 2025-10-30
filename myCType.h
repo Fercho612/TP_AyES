@@ -9,5 +9,8 @@ int esLetra(char c);
 int esSignoOCaracterEspecial(char c);
 
 char transformarCarLatin(int c);
+int myToLower(int c);
+
+
 
 #endif // MYCTYPE_H_INCLUDED

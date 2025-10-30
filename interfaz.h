@@ -6,17 +6,17 @@
 #include "myCType.h"
 #include <string.h>
 #include <ctype.h>
-
-#define TAM_CAD_PALABRA 50
+#include <locale.h>
 
 typedef struct {
     int cantidadPalabras;
     int cantidadSignos;
 } tEstadisticas;
 
-void iniciar();
-void menu();
+void ingresarArchivo(tDiccionario *pd);
+void menu(tDiccionario *pd);
 char seleccionarOpcion(const char* mensaje, const char* opciones);
+
 void mostrarAparicionesPalabraParticular(tDiccionario *pd);
 void calcularEstadisticasGenerales(void* elem, void* params);
 void mostrarEstadisticasGenerales(tDiccionario *pd);

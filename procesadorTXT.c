@@ -2,35 +2,37 @@
 #include "diccionario.h"
 #include "myCType.h"
 
+
 int procesarArchivo(const char *arch, tDiccionario *pd){
-    char auxSigno[2], auxPalabra[100] = "";
+    char auxPalabra[TAM_PALABRA] = "";
     char *pPalabra = auxPalabra;
-    int auxChar;
+    char auxSigno[2];
+    int fileChar;
 
     FILE *pf = fopen(arch, "rt");
     if(!pf){
-        printf("Error al abrir el archivo");
+        printf("Error al abrir el archivo\n\n");
         return ERROR_ARCH;
     }
 
-    auxChar = fgetc(pf);
-    while(auxChar != EOF){
-        if (auxChar == 195)
-            auxChar = transformarCarLatin(fgetc(pf));
+    fileChar = fgetc(pf);
+    while(fileChar != EOF){
+        if (fileChar == 195)
+            fileChar = transformarCarLatin(fgetc(pf));
 
 
-        if (!esLetra(auxChar)){
-            auxSigno[0] = auxChar;
+        if (!esLetra(fileChar)){
+            auxSigno[0] = fileChar;
             auxSigno[1] = '\0';
             crearOActualizar(pd, auxSigno);
         } else {
-            while(esLetra(auxChar) && auxChar != EOF){
-                *pPalabra = auxChar;
+            while(esLetra(fileChar) && fileChar != EOF){
+                *pPalabra = fileChar;
                 pPalabra++;
 
-                auxChar = fgetc(pf);
-                if (auxChar == 195)
-                    auxChar = transformarCarLatin(fgetc(pf));
+                fileChar = fgetc(pf);
+                if (fileChar == 195)
+                    fileChar = transformarCarLatin(fgetc(pf));
             }
             *pPalabra  = '\0';
             crearOActualizar(pd, auxPalabra);
@@ -39,7 +41,7 @@ int procesarArchivo(const char *arch, tDiccionario *pd){
             *pPalabra = '\0';
         }
 
-        auxChar = fgetc(pf);
+        fileChar = fgetc(pf);
     }
 
     return OK;

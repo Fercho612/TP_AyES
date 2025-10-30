@@ -1,4 +1,5 @@
 #include "lista.h"
+#include "diccionario.h"
 
 void crearLista(tLista *pl){
     *pl = NULL;
