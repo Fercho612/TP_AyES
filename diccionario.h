@@ -19,6 +19,6 @@ void recorrerDiccionario(tDiccionario *pd, void (*accion)(void *elem, void *para
 void vaciarDiccionario(tDiccionario *pd);
 void destruirDiccionario(tDiccionario *pd);
 
-int obtenerHash(const char *clave, int cap);
+unsigned int obtenerHash(const char *clave, int cap);
 
 #endif // DICCIONARIO_H_INCLUDED

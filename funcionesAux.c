@@ -1,7 +1,7 @@
 #include "headers.h"
 
-int obtenerHash(const char *clave, int cap) {
-    int auxHash = 0;
+unsigned int obtenerHash(const char *clave, int cap) {
+    unsigned int auxHash = 0;
     while (*clave != '\0') {
         auxHash += *clave;
         clave++;

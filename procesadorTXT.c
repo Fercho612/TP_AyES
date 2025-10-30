@@ -3,7 +3,7 @@
 #include "myCType.h"
 
 int procesarArchivo(const char *arch, tDiccionario *pd){
-    char auxPalabra[100] = "";
+    char auxSigno[2], auxPalabra[100] = "";
     char *pPalabra = auxPalabra;
     int auxChar;
 
@@ -15,22 +15,29 @@ int procesarArchivo(const char *arch, tDiccionario *pd){
 
     auxChar = fgetc(pf);
     while(auxChar != EOF){
+        if (auxChar == 195)
+            auxChar = transformarCarLatin(fgetc(pf));
+
 
         if (!esLetra(auxChar)){
-            char aux[2] = { auxChar, '\0' };
-            crearOActualizar(pd, aux);
-        }
+            auxSigno[0] = auxChar;
+            auxSigno[1] = '\0';
+            crearOActualizar(pd, auxSigno);
+        } else {
+            while(esLetra(auxChar) && auxChar != EOF){
+                *pPalabra = auxChar;
+                pPalabra++;
 
-        while(esLetra(auxChar) && auxChar != EOF){
-            *pPalabra = auxChar;
-            pPalabra++;
-            auxChar = fgetc(pf);
-        }
-        *pPalabra  = '\0';
-        crearOActualizar(pd, auxPalabra);
+                auxChar = fgetc(pf);
+                if (auxChar == 195)
+                    auxChar = transformarCarLatin(fgetc(pf));
+            }
+            *pPalabra  = '\0';
+            crearOActualizar(pd, auxPalabra);
 
-        pPalabra = auxPalabra;
-        *pPalabra = '\0';
+            pPalabra = auxPalabra;
+            *pPalabra = '\0';
+        }
 
         auxChar = fgetc(pf);
     }
