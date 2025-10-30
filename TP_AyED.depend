@@ -1,27 +1,50 @@
 # depslib dependency file v1.0
-1761683270 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\funcionesaux.c
+1761782022 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\funcionesaux.c
 	"headers.h"
 
 1761683636 d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\lista.h
 	"headers.h"
 
-1761682767 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\main.c
-	"diccionario.h"
+1761780637 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\main.c
+	"procesador.h"
 
-1761683252 d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\headers.h
+1761777505 d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\headers.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"lista.h"
 
-1761683665 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\primitivasdiccionario.c
+1761781966 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\primitivasdiccionario.c
 	"headers.h"
 	"diccionario.h"
 	"lista.h"
+	"myString.h"
 
-1761683646 d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\diccionario.h
+1761774624 d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\diccionario.h
 	"lista.h"
+	"myString.h"
 
 1761682000 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\primitivaslistase.c
 	"lista.h"
+
+1761774039 d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\mystring.h
+	"headers.h"
+
+1761777505 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\myctpype.c
+	"myCType.h"
+
+1761777505 d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\myctype.h
+	"headers.h"
+
+1761774320 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\mystring.c
+	"myString.h"
+
+1761782079 source:d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\procesadortxt.c
+	"procesador.h"
+	"diccionario.h"
+	"myCType.h"
+
+1761780650 d:\uni\programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\procesador.h
+	"headers.h"
+	"diccionario.h"
 

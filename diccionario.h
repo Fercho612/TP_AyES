@@ -2,6 +2,7 @@
 #define DICCIONARIO_H_INCLUDED
 
 #include "lista.h"
+#include "myString.h"
 
 #define NO_ENCONTRADO -3
 

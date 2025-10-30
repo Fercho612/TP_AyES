@@ -40,10 +40,22 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="myCTpype.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="myCType.h" />
+		<Unit filename="myString.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="myString.h" />
 		<Unit filename="primitivasDiccionario.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="primitivasListaSE.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="procesador.h" />
+		<Unit filename="procesadorTXT.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions />

@@ -2,7 +2,7 @@
 
 int obtenerHash(const char *clave, int cap) {
     int auxHash = 0;
-    while (*clave != '\n') {
+    while (*clave != '\0') {
         auxHash += *clave;
         clave++;
     }
@@ -24,5 +24,5 @@ void liberarInfo(void *info) {
 void mostrarReg(void *elem, void *params){
     tInfo *info = (tInfo *)elem;
 
-    printf("%s: %s\n", info->clave, (char*)info->valor);
+    printf("%s: %d\n", info->clave, *(int *)info->valor);
 }

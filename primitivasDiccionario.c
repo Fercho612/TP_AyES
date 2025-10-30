@@ -1,6 +1,7 @@
 #include "headers.h"
 #include "diccionario.h"
 #include "lista.h"
+#include "myString.h"
 
 void crearDiccionario(tDiccionario *pd, int cap){
     pd->tabla = malloc(sizeof(tLista) * cap);
@@ -38,12 +39,12 @@ int ponerEnDiccionario(tDiccionario *pd, char *clave, void *valor, size_t tamVal
         pLista = &(*pLista)->sig;
     }
 
-    if(!RESERVAR_MEMORIA_TINFO(nInfo, sizeof(tInfo), nInfo->valor, tamValor, nInfo->clave, strlen(clave) + 1)){
+    if(!RESERVAR_MEMORIA_TINFO(nInfo, sizeof(tInfo), nInfo->valor, tamValor, nInfo->clave, myStrlen(clave) + 1)){
            printf("Error en la memoria\n");
            exit(SIN_MEM);
     }
 
-    strcpy(nInfo->clave, clave);
+    myStrcpy(nInfo->clave, clave);
     memcpy(nInfo->valor, valor, tamValor);
 
     insertarUltimoLista(pLista, nInfo, sizeof(nInfo));
@@ -62,8 +63,10 @@ void* obtenerDiccionario(tDiccionario *pd, char *clave){
 
     while(*pLista){
         actInfo = (tInfo *)(*pLista)->info;
-        if(strcmp(actInfo->clave, clave) == 0)
+        if(myStrcmp(actInfo->clave, clave) == 0)
             return actInfo->valor;
+
+        pLista = &(*pLista)->sig;
     }
 
     return NULL; //No se encuentra valor para esa clave.
@@ -80,7 +83,7 @@ int sacarDeDiccionario(tDiccionario *pd, const char *clave){
 
     while(*pLista){
         actInfo = (tInfo *)(*pLista)->info;
-        if(strcmp(actInfo->clave, clave) == 0){
+        if(myStrcmp(actInfo->clave, clave) == 0){
             elim = *pLista;
             *pLista = elim->sig;
 

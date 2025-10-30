@@ -6,6 +6,7 @@
 #include <string.h>
 #include "lista.h"
 
+#define ERROR_ARCH -1
 #define SIN_MEM -1
 #define OK 1
 
@@ -18,7 +19,6 @@ typedef struct {
     char *clave;
     void *valor;
 } tInfo;
-
 
 
 void liberarInfo(void *info);
