@@ -22,7 +22,7 @@ int esSignoOCaracterEspecial(char c) {
 }
 
 char transformarCarLatin(int c){
-    char aux;
+    char aux = ' ';
 
     switch (c){
         case 129: aux = 'Á'; break;

@@ -5,7 +5,6 @@
 
 #define LISTA_VACIA -2
 
-
 #define RESERVAR_MEMORIA_NODO(X,Y,Z,W) ( \
         ((X) = (tNodo*)malloc(Y)) == NULL ? 0 : \
         ((Z) = malloc(W)) == NULL ? (free((X)), 0) : 1 )

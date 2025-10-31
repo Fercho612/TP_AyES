@@ -13,7 +13,6 @@ int main()
 
     ingresarArchivo(&diccionario);
 
-
     menu(&diccionario);
 
     return 0;

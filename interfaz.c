@@ -2,57 +2,72 @@
 #include "procesador.h"
 #include "myString.h"
 
+/* to do:
+    - Funcion que limpia buffer
+    - Limpiar consola
+*/
+
 void ingresarArchivo(tDiccionario *pd){
     char arch[50];
 
     printf("Ingrese nombre de archivo a procesar: ");
     scanf("%s", arch);
+    limpiarBuffer();
 
     while (procesarArchivo(arch, pd) == ERROR_ARCH){
         printf("Ingrese nombre de archivo a procesar: ");
         scanf("%s", arch);
+        limpiarBuffer();
     }
-
 }
 
 void menu(tDiccionario *pd) {
-
     char opcionSeleccionada;
+
     do {
-        opcionSeleccionada = seleccionarOpcion("\n\t Menu de opciones \n"
-                                          "a) Mostrar estadisticas generales.\n"
-                                          "b) Mostrar listado de apariciones por palabra.\n"
-                                          "c) Mostrar cantidad de apariciones de palabra en particular.\n"
-                                          "s) Salir del Programa\n\n"
-                                          "Elija una opción: ", "abcs");
+        opcionSeleccionada = seleccionarOpcion("abcs");
 
         switch(opcionSeleccionada) {
-        case 'a':
-            mostrarEstadisticasGenerales(pd);
-            break;
-        case 'b':
-            mostrarEstadisticasPorPalabra(pd);
-            break;
-        case 'c':
-            mostrarAparicionesPalabraParticular(pd);
-            break;
-        case 's':
-            printf("Hasta Pronto!");
-            exit(1);
-            break;
-        default:
-            break;
+            case 'a':
+                mostrarEstadisticasGenerales(pd);
+                system("pause");
+                break;
+            case 'b':
+                mostrarEstadisticasPorPalabra(pd);
+                system("pause");
+                break;
+            case 'c':
+                mostrarAparicionesPalabraParticular(pd);
+                system("pause");
+                break;
+            case 's':
+                printf("\tHasta Pronto!\n");
+                exit(1);
+                break;
+            default:
+                break;
         }
     }
-    while(opcionSeleccionada != 'd');
+    while(opcionSeleccionada != 's');
 }
 
-char seleccionarOpcion(const char* mensaje, const char* opciones)
-{
+void imprimirMenu(){
+    system("cls");
+    printf("\t\tMenu de opciones\n\n");
+    printf("a) Mostrar estadisticas generales.\n");
+    printf("b) Mostrar listado de apariciones por palabra.\n");
+    printf("c) Mostrar cantidad de apariciones de palabra en particular.\n");
+    printf("s) Salir del Programa\n\n");
+    printf("Seleccione una opción: ");
+}
+
+
+char seleccionarOpcion(const char* opciones){
     char opcionSeleccionada;
 
-    puts(mensaje);
-    scanf(" %c", &opcionSeleccionada);
+    imprimirMenu();
+    scanf("%c", &opcionSeleccionada);
+    limpiarBuffer();
 
     opcionSeleccionada = myToLower(opcionSeleccionada);
 
@@ -60,34 +75,13 @@ char seleccionarOpcion(const char* mensaje, const char* opciones)
         printf("La opción ingresada no es valida.\n");
         printf("Ingrese una opción nuevamente: ");
 
-        scanf(" %c", &opcionSeleccionada);
-        putchar('\n');
+        scanf("%c", &opcionSeleccionada);
+        limpiarBuffer();
 
         opcionSeleccionada = myToLower(opcionSeleccionada);
     }
-
+    system("cls");
     return opcionSeleccionada;
-}
-
-
-
-
-void mostrarAparicionesPalabraParticular(tDiccionario *pd) {
-    char cad[TAM_PALABRA];
-    int *valor;
-    int cantidad;
-
-    puts("Ingrese la palabra sobre la que desea la informacion:\n");
-    scanf("%s", cad);
-
-    valor = obtenerDiccionario(pd, cad);
-
-    if(!valor)
-        cantidad = 0;
-    else
-        cantidad = *valor;
-
-    printf("Apariciones de la palabra '%s': %d\n", cad, cantidad);
 }
 
 void calcularEstadisticasGenerales(void* elem, void* params) {
@@ -110,17 +104,46 @@ void mostrarEstadisticasGenerales(tDiccionario *pd) {
     printf("Cantidad de palabras: %d\nCantidad de signos: %d\n\n", estadisticas.cantidadPalabras, estadisticas.cantidadSignos);
 }
 
-void mostrarClaveValor(void* elem, void* params) {
-    tInfo *info = (tInfo*)elem;
-
-    printf("%s: %d\n", info->clave, *(int*)info->valor);
-}
-
+// B
 void mostrarEstadisticasPorPalabra(tDiccionario *pd) {
-    puts("Estadisticas por cada palabra y signo:\n");
+    printf("\t\tEstadisticas por cada palabra y signo:\n\n");
     recorrerDiccionario(pd, mostrarClaveValor, NULL);
     putchar('\n');
 }
 
 
+void mostrarAparicionesPalabraParticular(tDiccionario *pd) {
+    char cad[TAM_PALABRA];
+    int *valor;
+    int cantidad;
 
+    printf("Ingrese la palabra sobre la que desea la informacion: ");
+    scanf("%s", cad);
+    limpiarBuffer();
+
+    valor = obtenerDiccionario(pd, cad);
+
+    if(!valor)
+        cantidad = 0;
+    else
+        cantidad = *valor;
+
+    printf("Apariciones de la palabra '%s': %d\n\n\n", cad, cantidad);
+}
+
+void mostrarClaveValor(void* elem, void* params) {
+    tInfo *info = (tInfo*)elem;
+
+    if(myStrcmp(info->clave, " ") == 0) {
+        printf("' ': %d \n", *(int *)info->valor);
+        return;
+    }
+
+    printf("%s: %d\n", info->clave, *(int*)info->valor);
+}
+
+void limpiarBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+    return;
+}

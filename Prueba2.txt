@@ -1,0 +1,4 @@
+Construya una interfaz de usuario donde primero el usuario ingrese el archivo de texto a
+procesar. Luego muestre un menú donde se pueda seleccionar mostrar las estadísticas
+generales (cantidad de palabras y signos), el listado de apariciones por palabra o la
+cantidad de apariciones de una palabra en particular que ingrese un usuario

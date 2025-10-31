@@ -63,3 +63,63 @@
 	<ctype.h>
 	<locale.h>
 
+1761943335 source:d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\interfaz.c
+	"interfaz.h"
+	"procesador.h"
+	"myString.h"
+
+1761942860 d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\interfaz.h
+	"headers.h"
+	"diccionario.h"
+	"myCType.h"
+	<string.h>
+	<locale.h>
+
+1761936074 d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\headers.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1761854955 d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\diccionario.h
+	"headers.h"
+	"lista.h"
+	"myString.h"
+
+1761936101 d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\lista.h
+	"headers.h"
+
+1761856366 d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\mystring.h
+	"headers.h"
+
+1761856366 d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\myctype.h
+	"headers.h"
+
+1761853835 d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\procesador.h
+	"headers.h"
+	"diccionario.h"
+
+1761857943 source:d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\main.c
+	"procesador.h"
+	"interfaz.h"
+
+1761942504 source:d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\myctpype.c
+	"myCType.h"
+
+1761856334 source:d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\mystring.c
+	"myString.h"
+
+1761854556 source:d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\primitivasdiccionario.c
+	"headers.h"
+	"diccionario.h"
+	"lista.h"
+	"myString.h"
+
+1761854595 source:d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\primitivaslistase.c
+	"lista.h"
+	"diccionario.h"
+
+1761857982 source:d:\uni\materias\2-programacion uni (c)\2 -algoritmo y estructuras de datos\tp_ayed\procesadortxt.c
+	"procesador.h"
+	"diccionario.h"
+	"myCType.h"
+

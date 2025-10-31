@@ -5,7 +5,6 @@
 #include "diccionario.h"
 #include "myCType.h"
 #include <string.h>
-#include <ctype.h>
 #include <locale.h>
 
 typedef struct {
@@ -14,13 +13,17 @@ typedef struct {
 } tEstadisticas;
 
 void ingresarArchivo(tDiccionario *pd);
+
 void menu(tDiccionario *pd);
-char seleccionarOpcion(const char* mensaje, const char* opciones);
+void imprimirMenu();
+char seleccionarOpcion(const char* opciones);
 
 void mostrarAparicionesPalabraParticular(tDiccionario *pd);
 void calcularEstadisticasGenerales(void* elem, void* params);
 void mostrarEstadisticasGenerales(tDiccionario *pd);
 void mostrarClaveValor(void* elem, void* params);
 void mostrarEstadisticasPorPalabra(tDiccionario *pd);
+
+void limpiarBuffer();
 
 #endif // INTERFAZ_H_INCLUDED

@@ -1,0 +1,5 @@
+Debe valerse del TDA Diccionario desarrollado en la primera parte.
+
+
+Debe proporcionar al menos 4 lotes de pruebas, donde se pueda notar cómo funciona el
+diccionario y donde se vean colisiones en los hashes.
