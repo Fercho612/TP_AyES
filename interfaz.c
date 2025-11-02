@@ -23,13 +23,16 @@ void ingresarArchivo(tDiccionario *pd){
 
 void menu(tDiccionario *pd) {
     char opcionSeleccionada;
+    tEstadisticas estadisticas;
+
+    estadisticas.cantidadPalabras = -1;
 
     do {
         opcionSeleccionada = seleccionarOpcion("abcs");
 
         switch(opcionSeleccionada) {
             case 'a':
-                mostrarEstadisticasGenerales(pd);
+                mostrarEstadisticasGenerales(pd, &estadisticas);
                 system("pause");
                 break;
             case 'b':
@@ -93,15 +96,15 @@ void calcularEstadisticasGenerales(void* elem, void* params) {
         ((tEstadisticas*)params)->cantidadSignos += (*(int*)info->valor);
 }
 
-void mostrarEstadisticasGenerales(tDiccionario *pd) {
-    tEstadisticas estadisticas;
+void mostrarEstadisticasGenerales(tDiccionario *pd, tEstadisticas *pe) {
+    if(pe->cantidadPalabras == -1) {
+        pe->cantidadPalabras = 0;
+        pe->cantidadSignos = 0;
 
-    estadisticas.cantidadPalabras = 0;
-    estadisticas.cantidadSignos = 0;
+        recorrerDiccionario(pd, calcularEstadisticasGenerales, pe);
+    }
 
-    recorrerDiccionario(pd, calcularEstadisticasGenerales, &estadisticas);
-
-    printf("Cantidad de palabras: %d\nCantidad de signos: %d\n\n", estadisticas.cantidadPalabras, estadisticas.cantidadSignos);
+    printf("Cantidad de palabras: %d\nCantidad de signos: %d\n\n", pe->cantidadPalabras, pe->cantidadSignos);
 }
 
 // B

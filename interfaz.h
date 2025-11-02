@@ -20,7 +20,7 @@ char seleccionarOpcion(const char* opciones);
 
 void mostrarAparicionesPalabraParticular(tDiccionario *pd);
 void calcularEstadisticasGenerales(void* elem, void* params);
-void mostrarEstadisticasGenerales(tDiccionario *pd);
+void mostrarEstadisticasGenerales(tDiccionario *pd, tEstadisticas *pe);
 void mostrarClaveValor(void* elem, void* params);
 void mostrarEstadisticasPorPalabra(tDiccionario *pd);
 
